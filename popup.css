@@ -1,0 +1,246 @@
+/* PoE Wiki Search Extension - Official PoE Trade Design */
+@font-face {
+  font-family: "FontinSmallCaps";
+  font-weight: normal;
+  font-style: normal;
+  src: url("./assets/fonts/FontinSmallCaps.woff2") format("woff2"),
+       url("./assets/fonts/FontinSmallCaps.woff") format("woff"),
+       url("./assets/fonts/FontinSmallCaps.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FontinRegular";
+  font-weight: normal;
+  font-style: normal;
+  src: url("./assets/fonts/FontinRegular.woff2") format("woff2"),
+       url("./assets/fonts/FontinRegular.woff") format("woff"),
+       url("./assets/fonts/FontinRegular.ttf") format("truetype");
+}
+
+:root {
+  --poe-bg: #1e2124;
+  --poe-border: #000000;
+  --poe-hover: #533d21;
+  --poe-highlight: #a38d6d;
+  --poe-text: #d4cabb;
+  --poe-input-h: 34px;
+  --poe-item-h: 30px;
+  --poe-pad-x: 12px;
+  --poe-pad-y: 6px;
+  --poe-radius: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 300px;
+    margin: 0;
+    padding: 10px;
+    font-family: "FontinRegular", serif;
+    font-size: 14px;
+    background-color: var(--poe-bg);
+    color: var(--poe-text);
+    border: 1px solid var(--poe-border);
+    border-bottom: none;
+    text-transform: uppercase;
+    overflow: visible;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+}
+
+.container {
+    padding: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
+/* PoE Trade toggle buttons */
+.poe-toggle {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    border: 1px solid var(--poe-border);
+    background-color: var(--poe-bg);
+}
+
+.poe-toggle button {
+    flex: 1;
+    background-color: #1e2124;
+    border: none;
+    border-right: 1px solid var(--poe-border);
+    color: var(--poe-text);
+    font-family: "FontinSmallCaps", serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    padding: 6px 0;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+}
+
+.poe-toggle button:last-child {
+    border-right: none;
+}
+
+.poe-toggle button:hover {
+    background-color: var(--poe-hover);
+}
+
+.poe-toggle button.active {
+    background-color: var(--poe-highlight);
+    color: #000;
+    font-weight: normal;
+}
+
+.search-container {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.search-wrapper {
+    position: relative;
+}
+
+/* PoE Trade input styling */
+#searchInput {
+    margin: 0; 
+    padding: 4px 8px;
+    display: block; 
+    width: 100%;
+    height: var(--poe-input-h);
+    background-color: #2a2a2a;
+    color: var(--poe-text);
+    border: 1px solid var(--poe-border);
+    font-family: "FontinRegular", serif;
+    font-size: 14px;
+    line-height: 1.4;
+    box-sizing: border-box;
+    outline: none;
+    transition: none;
+    border-radius: var(--poe-radius);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+}
+
+#searchInput::placeholder {
+    color: #9d8965;
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: var(--poe-highlight);
+}
+
+#searchInput:hover {
+    border-color: var(--poe-border);
+}
+
+/* The list must not occupy any space by default */
+#suggestions {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    height: 0;
+    background: transparent;
+    list-style: none;
+    z-index: 1000;
+}
+
+/* Robust rule: if truly empty, keep it hidden (guard against accidental whitespace) */
+#suggestions:empty { 
+    display: none; 
+}
+
+/* Only when we explicitly open it, show PoE-styled panel */
+#suggestions.open {
+    display: block;
+    margin-top: 2px;                        /* tiny gap under input */
+    border: 1px solid var(--poe-border);
+    border-top: none;                        /* avoid double border with input */
+    background: var(--poe-bg);
+    border-radius: var(--poe-radius);
+    max-height: none;
+    overflow-y: visible;
+    padding: 0;
+    height: auto;
+}
+
+/* Item + link styles remain the same (ensure no fixed height) */
+#suggestions li { 
+    border-bottom: 1px solid var(--poe-border); 
+}
+#suggestions li:last-child { 
+    border-bottom: 0; 
+}
+
+#suggestions li a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+    color: var(--poe-text);
+    font-family: "FontinRegular", serif;
+    font-size: 12px;
+    line-height: 1.4;
+    cursor: pointer;
+    background: transparent;
+    text-transform: uppercase;
+    transition: background-color 0.1s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
+}
+
+#suggestions li a:hover {
+    background-color: var(--poe-hover);
+    color: #fff;
+}
+
+#suggestions li.highlighted a {
+    background-color: var(--poe-hover);
+    color: #fff;
+}
+
+/* Special styling for search item */
+#suggestions li.search-item a {
+    color: #9d8965;
+    font-style: italic;
+}
+
+#suggestions li.search-item:hover a,
+#suggestions li.search-item.highlighted a {
+    color: #fff;
+    background-color: var(--poe-hover);
+    font-style: normal;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoE Wiki Search</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <div id="version-toggle" class="poe-toggle">
+            <button id="toggle-poe1" class="active">Path of Exile</button>
+            <button id="toggle-poe2">Path of Exile II</button>
+        </div>
+        <div class="search-container">
+            <div class="search-wrapper">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Search PoE Wiki…" 
+                    autocomplete="off"
+                >
+                <ul id="suggestions" class="suggestions-dropdown"></ul>
+            </div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "FontinSmallCaps";
+  font-weight: normal;
+  font-style: normal;
+  src: url("./FontinSmallCaps.woff2") format("woff2"),
+       url("./FontinSmallCaps.woff") format("woff"),
+       url("./FontinSmallCaps.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FontinRegular";
+  font-weight: normal;
+  font-style: normal;
+  src: url("./FontinRegular.woff2") format("woff2"),
+       url("./FontinRegular.woff") format("woff"),
+       url("./FontinRegular.ttf") format("truetype");
+}
