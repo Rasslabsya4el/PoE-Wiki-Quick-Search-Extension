@@ -11,15 +11,12 @@ PoE Wiki Quick Search is a Chrome extension that lets you quickly search the Pat
 
 ## 📸 Screenshots
 
-<div style="display:flex; gap: 4%; align-items:flex-start;">
-  <div style="width:48%;">
-    <img src="./Screenshot_2.png" alt="Extension popup — waiting for input." width="100%" />
-    <p align="center"><em>Extension popup — waiting for input.</em></p>
-  </div>
-  <div style="width:48%;">
-    <img src="./Screenshot_1.png" alt="Dropdown with live wiki suggestions." width="100%" />
-    <p align="center"><em>Dropdown with live wiki suggestions.</em></p>
-  </div>
+**Extension popup — waiting for input**
+![Extension popup — waiting for input.](./Screenshot_2.png)
+
+**Dropdown with live wiki suggestions**
+![Dropdown with live wiki suggestions.](./Screenshot_1.png)
+
   
 </div>
 
